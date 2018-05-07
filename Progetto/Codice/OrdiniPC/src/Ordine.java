@@ -6,8 +6,15 @@ import java.time.Month;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Ordine 
+public class Ordine implements Serializable
 {
 	private String codice;
 	private String nomeCliente;
@@ -28,6 +35,10 @@ public class Ordine
 		Prodotti = prodotti;
 		this.fatturato = fatturato;
 		this.data = data;
+	}
+
+	public Ordine() {
+		
 	}
 
 	//toString
@@ -81,6 +92,8 @@ public class Ordine
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
+
+	
 	
 	
 	

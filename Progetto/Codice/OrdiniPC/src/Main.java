@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,32 +7,74 @@ import java.time.Month;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main 
 {
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws ClassNotFoundException, IOException  
 	{
-		/*test data
-		LocalDate data = LocalDate.now();
+		String[] menu  = new String[7];
+		menu[0]="Registra Nuovo Ordine ";
+		menu[1]="Elimina Ordine ";
+		menu[2]="Evadi Ordine ";
+		menu[3]="Visualizza Ordini Da Evadere ";
+		menu[4]="Visualizza Ordini Evasi ";
+		menu[5]="Visualizza Ordini Cliente ";
+		menu[6]="Esci";
 		
-		Ordine n1 = new Ordine(null, null, null, 0, args, 0, data);
+		Scanner tastiera=new Scanner(System.in);
+		int a = 0;
+		Lista l1 = new Lista(); //ordini da evadere
+		Lista l2 = new Lista(); //ordini eliminati
+		Lista l3 = new Lista(); //ordini evasi
+		LocalDate data= LocalDate.now();
 		
-		n1.setData(data);
-		
-		System.out.println(n1.getData());
-		*/
+		l1.salvaFesta("lista.csv");
+		l1.caricaFesta("lista.csv");
 		
 		
-		String[] ciao  = new String[6];
-		ciao[0]="Registra Nuovo Ordine ";
-		ciao[1]="Elimina Ordine ";
-		ciao[2]="Evadi Ordine ";
-		ciao[3]="Visualizza Ordini Da Evadere ";
-		ciao[4]="Visualizza Ordini Evasi ";
-		ciao[5]="Visualizza Ordini Cliente ";
 		
-		Menu.show(ciao);
+		do 
+		{
+			
+			Menu.show(menu);
+			a = tastiera.nextInt();
+			
+			if (a==0)
+			{
+				Ordine o1 = new Ordine();
+				System.out.println("Inserisci il codice");
+				o1.setCodice(tastiera.nextLine());
+				System.out.println("Inserisci il nome del cliente");
+				o1.setNomeCliente(tastiera.nextLine());
+				System.out.println("Inserisci una breve descrizione");
+				o1.setDescrizione(tastiera.nextLine());
+				System.out.println("Inserisci il numero di prodotti");
+				o1.setNumeroProdotti(tastiera.nextInt());
+				System.out.println("Inserisci il fatturato");
+				o1.setFatturato(tastiera.nextInt());
+				o1.setData(data);
+				l1.inserisciInTesta(o1);
+				l1.salvaFesta("lista.csv");
+				o1 = null;
+			}
+			else if  (a==1)
+			{
+				System.out.println("Inserisci il codice dell'ordine che vuoi eliminare");
+				
+			}
+			
+		} 
+		while (true);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 
