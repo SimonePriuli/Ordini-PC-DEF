@@ -23,6 +23,8 @@ public class Ordine implements Serializable
 	private String[] Prodotti;
 	private int fatturato;
 	private LocalDate data;
+	private boolean evaso = false;
+	private boolean eliminato = true;
 	
 	
 	//costruttore
@@ -50,9 +52,28 @@ public class Ordine implements Serializable
 	}
 
 	//setter e getter
+	
+	
+	
 	public String getCodice() {
 		return codice;
 	}
+	public boolean isEvaso() {
+		return evaso;
+	}
+
+	public void setEvaso(boolean evaso) {
+		this.evaso = evaso;
+	}
+
+	public boolean isEliminato() {
+		return eliminato;
+	}
+
+	public void setEliminato(boolean eliminato) {
+		this.eliminato = eliminato;
+	}
+
 	public void setCodice(String codice) {
 		this.codice = codice;
 	}

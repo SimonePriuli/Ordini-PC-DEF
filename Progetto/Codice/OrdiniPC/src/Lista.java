@@ -191,14 +191,14 @@ public class Lista implements Serializable
 		file.close();
 	}
 	
-	public Ordine caricaFesta (String nomeFile) throws IOException, ClassNotFoundException
+	public Lista caricaFesta (String nomeFile) throws IOException, ClassNotFoundException
 	{
 		FileInputStream file=new FileInputStream(nomeFile);
 		ObjectInputStream reader= new ObjectInputStream(file);
 		
-		Ordine festa;
+		Lista festa;
 		
-		festa=(Ordine)(reader.readObject());
+		festa=(Lista)(reader.readObject());
 		file.close();
 		return festa;
 	}

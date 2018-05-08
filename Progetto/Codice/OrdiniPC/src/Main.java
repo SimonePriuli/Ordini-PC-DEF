@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Main 
 {
 
-	public static void main(String[] args) throws ClassNotFoundException, IOException  
+	public static void main(String[] args) throws ClassNotFoundException, IOException, FestaException  
 	{
 		String[] menu  = new String[7];
 		menu[0]="Registra Nuovo Ordine ";
@@ -31,7 +31,7 @@ public class Main
 		LocalDate data= LocalDate.now();
 		
 		l1.salvaFesta("lista.csv");
-		l1.caricaFesta("lista.csv");
+		l1=l1.caricaFesta("lista.csv");
 		
 		
 		
@@ -45,6 +45,7 @@ public class Main
 			{
 				Ordine o1 = new Ordine();
 				System.out.println("Inserisci il codice");
+				tastiera.nextLine();
 				o1.setCodice(tastiera.nextLine());
 				System.out.println("Inserisci il nome del cliente");
 				o1.setNomeCliente(tastiera.nextLine());
@@ -59,11 +60,50 @@ public class Main
 				l1.salvaFesta("lista.csv");
 				o1 = null;
 			}
-			else if  (a==1)
+			else if  (a==1) //elimina ordine
 			{
 				System.out.println("Inserisci il codice dell'ordine che vuoi eliminare");
+				tastiera.nextLine();
+				
+				String code;
+				boolean codevf = false;
+				Ordine o2 = new Ordine();
+				
+				code = tastiera.nextLine();
+				
+				for (int i = 1; i <= l1.getElementi(); i++) 
+				{
+					o2 = l1.getInvitato(i);
+					if (o2.getCodice().compareToIgnoreCase(code)==0)
+					{
+						l1.eliminaInPosizione(i);
+						codevf = true;
+						System.out.println("Ordine eliminato");
+						o2 = null;
+					}
+				}
+				if (codevf==false)
+					System.out.println("Nessun elemento corrispondente");
+			}
+			else if (a==2) //evadi ordine
+			{
 				
 			}
+			else if (a==3) //visualizza ordine da evadere
+			{
+				for (int i = 1; i <= l1.getElementi(); i++) 
+				{
+					Ordine o2 = l1.getInvitato(i);
+					if (!(o2.isEvaso()))
+					{
+						System.out.println("ORDINE:");
+						System.out.println(o2.getCodice());
+						System.out.println(o2.getNomeCliente());
+						System.out.println("");
+					}
+				}
+			}
+			
 			
 		} 
 		while (true);
