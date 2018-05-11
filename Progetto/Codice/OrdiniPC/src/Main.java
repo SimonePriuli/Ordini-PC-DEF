@@ -14,14 +14,15 @@ public class Main
 
 	public static void main(String[] args) throws ClassNotFoundException, IOException, FestaException  
 	{
-		String[] menu  = new String[7];
+		String[] menu  = new String[8];
 		menu[0]="Registra Nuovo Ordine ";
 		menu[1]="Elimina Ordine ";
 		menu[2]="Evadi Ordine ";
 		menu[3]="Visualizza Ordini Da Evadere ";
-		menu[4]="Visualizza Ordini Evasi ";
+		menu[4]="Visualizza Ordini Evasi";
 		menu[5]="Visualizza Ordini Cliente ";
 		menu[6]="Esci";
+		menu[7]="Resetta tutte le liste";
 		
 		Scanner tastiera=new Scanner(System.in);
 		int a = 0;
@@ -30,9 +31,11 @@ public class Main
 		Lista l3 = new Lista(); //ordini evasi
 		LocalDate data= LocalDate.now();
 		
-		l1.salvaFesta("lista.csv");
 		l1=l1.caricaFesta("lista.csv");
-		
+		//l2.salvaFesta("listaEliminati.csv");
+		l2=l2.caricaFesta("listaEliminati.csv");
+		//l2.salvaFesta("listaEvasi.csv");
+		l3=l3.caricaFesta("listaEvasi.csv");
 		
 		
 		do 
@@ -79,14 +82,46 @@ public class Main
 						l1.eliminaInPosizione(i);
 						codevf = true;
 						System.out.println("Ordine eliminato");
+						l2.inserisciInTesta(o2);
 						o2 = null;
 					}
 				}
 				if (codevf==false)
 					System.out.println("Nessun elemento corrispondente");
+				l1.salvaFesta("lista.csv");
+				l2.salvaFesta("listaEliminati.csv");
 			}
 			else if (a==2) //evadi ordine
 			{
+				
+				System.out.println("Inserisci il codice dell'ordine che vuoi evadere");
+				tastiera.nextLine();
+				
+				String code;
+				boolean codevf = false;
+				Ordine o2 = new Ordine();
+				
+				code = tastiera.nextLine();
+				
+				for (int i = 1; i <= l1.getElementi(); i++) 
+				{
+					o2 = l1.getInvitato(i);
+					if (o2.getCodice().compareToIgnoreCase(code)==0)
+					{
+						l1.eliminaInPosizione(i);
+						codevf = true;
+						System.out.println("Ordine evaso!");
+						l3.inserisciInTesta(o2);
+						o2 = null;
+					}
+				}
+				
+				if (codevf==false)
+					System.out.println("Nessun elemento corrispondente");
+				l1.salvaFesta("lista.csv");
+				l3.salvaFesta("listaEvasi.csv");
+				
+				
 				
 			}
 			else if (a==3) //visualizza ordine da evadere
@@ -104,9 +139,103 @@ public class Main
 				}
 			}
 			
+			else if (a==7)
+			{
+				for (int i = 1; i <= l1.getElementi(); i++)
+				{
+					l1.eliminaInPosizione(i);
+					l1.salvaFesta("lista.csv");
+					System.out.println("Lista ordini da evadere resettata");
+				}
+				for (int i = 1; i <= l2.getElementi(); i++)
+				{
+					l2.eliminaInPosizione(i);
+					l2.salvaFesta("listaEliminati.csv");
+					System.out.println("Lista ordini eliminati resettata");
+				}
+				for (int i = 1; i <= l3.getElementi(); i++)
+				{
+					l3.eliminaInPosizione(i);
+					l3.salvaFesta("listaEvasi.csv");
+					System.out.println("Lista ordini evasi resettata");
+				}
+			}
+			else if (a==6)
+				break;
 			
-		} 
-		while (true);
+			else if (a==4)
+			{
+				for (int i = 1; i <= l3.getElementi(); i++) 
+				{
+					Ordine o2 = l3.getInvitato(i);
+					
+						System.out.println("ORDINE:");
+						System.out.println(o2.getCodice());
+						System.out.println(o2.getNomeCliente());
+						System.out.println("");
+				}
+			}
+			
+			else if (a==5)
+			{
+				System.out.println("Inserisci il nome del cliente del quale vuoi vdere gli ordini");
+				tastiera.nextLine();
+				
+				String nome;
+				boolean codevf = false;
+				Ordine o2 = new Ordine();
+				
+				nome = tastiera.nextLine();
+				
+				System.out.println("ORDINI DA EVADERE");
+				
+				for (int i = 1; i <= l1.getElementi(); i++) 
+				{
+					o2 = l1.getInvitato(i);
+					if (o2.getNomeCliente().compareToIgnoreCase(nome)==0)
+					{
+						System.out.println("ORDINE:");
+						System.out.println(o2.getCodice());
+						System.out.println(o2.getNomeCliente());
+						System.out.println("");
+					}
+				}
+				
+				System.out.println("ORDINI ELIMINATI");
+				
+				for (int i = 1; i <= l2.getElementi(); i++) 
+				{
+					o2 = l2.getInvitato(i);
+					if (o2.getNomeCliente().compareToIgnoreCase(nome)==0)
+					{
+						System.out.println("ORDINE:");
+						System.out.println(o2.getCodice());
+						System.out.println(o2.getNomeCliente());
+						System.out.println("");
+					}
+				}
+				
+				System.out.println("ORDINI EVASI");
+				
+				for (int i = 1; i <= l3.getElementi(); i++) 
+				{
+					o2 = l3.getInvitato(i);
+					if (o2.getNomeCliente().compareToIgnoreCase(nome)==0)
+					{
+						System.out.println("ORDINE:");
+						System.out.println(o2.getCodice());
+						System.out.println(o2.getNomeCliente());
+						System.out.println("");
+					}
+				}
+				
+				if (codevf==false)
+					System.out.println("Nessun elemento corrispondente");
+				
+				
+				
+			}
+		}while (true);
 		
 		
 		
