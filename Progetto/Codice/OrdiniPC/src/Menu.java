@@ -1,4 +1,8 @@
-
+/**
+ * Classe dedicata al menù (viene utilizzata nel main)
+ * @author simonepriuli
+ *
+ */
 public class Menu 
 {
 

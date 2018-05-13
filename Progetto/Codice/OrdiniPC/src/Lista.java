@@ -6,6 +6,22 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * La classe lista è forse la più importante in quanto rende possibile l'implementazione dell'intero software (Sia la gestione 
+ * degli ordini che il salvataggio/caricamento su file delle liste stesse). I metodi utilizzati nel main della classe sono: getElementi 
+ * (che restituisce il numero degli elementi contenuti all'interno della lista), inserisciInTesta: metodo utilizzato quando si va 
+ * ad aggiungere un oggetto di tipo Ordine nel contenuto informativo di un nuovo nodo (per quanto riguarda l'aggiunta si utilizzerà
+ * solo questo metodo in quanto il modo con il quale è scritto il programma prevede una lista in ordine di data, ed essendo che la
+ * data di un ordine è sempre quella di quando lo si inserisce non risulta necessario inserire ordini in posizioni che non siano la 
+ * testa). eliminaInPosizione: viene utilizzato quando si evade o si elimina un ordine (passandogli il codice (string), in questo
+ * caso non si utilizza eliminaInTesta in quanto non sempre il nodo da eliminare è l'ultimo inserito. getInvitato: utilizzata per 
+ * assegnare un oggetto di tipo Ordine ad un un oggetto vuoto (o1 solitamente) contenente null. Metodo usato per fare confronti fra i codici
+ * o fra nome (ricerca/eliminazione/evasione) oppure per loperazione di output su console. Infine caricaFesta e salvaFesta per appunto 
+ * caricare e salvare i file.
+ * @author simonepriuli
+ *
+ */
+
 public class Lista implements Serializable
 {
 

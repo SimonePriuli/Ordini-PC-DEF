@@ -9,6 +9,17 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Il main in questo progetto utilizzando la classe Menu, permette all'utente di interfacciarsi con il software. L'utente ha 8 
+ * opzioni che si ripetono all'interno di un ciclo do, while dove la condizione non si verifica mai, di fatto c'è l'apposita
+ * funzione (6): esci che appunto fa concludere il ciclo con l'istruzione break;
+ * Le voci: Registra Nuovo Ordine, Elimina Ordine, Visualizza Ordini Da Evadere, Visualizza Ordini Evasi, Visualizza Ordini Cliente
+ * , Esci & Resetta tutte le liste. Sfruttano i metodi delle altre classi per permettere all'utente di svolgere le funzioni del programma.
+ * La funzione (7) resetta tutte le liste è stata aggiunnta in seguito per semplificare i test.
+ * @author simonepriuli
+ *
+ */
+
 public class Main 
 {
 
@@ -41,6 +52,7 @@ public class Main
 		do 
 		{
 			
+			System.out.println("");
 			Menu.show(menu);
 			a = tastiera.nextInt();
 			

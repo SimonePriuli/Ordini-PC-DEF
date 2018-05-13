@@ -14,6 +14,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * La classe ordine rappresenta un Ordine di Pc, contiene gli attributi: Codice, nomeCliente, Descrizione, numeroProdotti, Prodotti
+ * , Fatturato, Data (il valore di data è sempre quello di quando si inserisce l'ordine (strategia adottata per far si che la lista
+ * degli ordini sia in ordine dal più recente al meno recente)). Contiene inoltre due attributi di tipo boolenan (evaso & eliminato)
+ * che non vengono però utilizzati. Attributi inseriti nel caso fossero necessari in una futura manutenzione (include il cambio di 
+ * eliminazione ed evasione. Infatti ora ci sono tre liste (eliminati, evasi & da evadere)).
+ * @author simonepriuli
+ *
+ */
+
 public class Ordine implements Serializable
 {
 	private String codice;
